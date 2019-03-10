@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class EntradaSaida {
     public static void main(String[] args) throws FileNotFoundException {
 
-        System.out.println(parserArquivo("imul 0x0001, 0x0002, 0x0003",8));
+        arquivoAssembly("assembly16bits.txt");
 
     }
 
@@ -24,15 +24,16 @@ public class EntradaSaida {
             while (linha !=null){
 
                 System.out.println(linha);
+                System.out.println(parserArquivo(linha));
                 linha = lerArquivo.readLine();
-                //inserir parser aqui
+
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static boolean parserArquivo(String linha, int tamanhoBarramento){
+    public static boolean parserArquivo(String linha){
         if(linha.matches("(?i)mov\\s+0x\\d{4},\\s*\\d")){
             return true;
         }
@@ -93,6 +94,27 @@ public class EntradaSaida {
         if(linha.matches("(?i)imul\\s+0x\\d{4},\\s*0x\\d{4},\\s*0x\\d{4}")){
             return true;
         }
+        if(linha.matches("(?i)imul\\s+0x\\d{4},\\s*0x\\d{4},\\s*\\d+")){
+            return true;
+        }
+        if(linha.matches("(?i)imul\\s+[a-zA-Z],\\s*\\d+,\\s*[a-zA-Z]+")){
+            return true;
+        }
+        if(linha.matches("(?i)imul\\s+[a-zA-Z],\\s*\\d+,\\s*0x\\d{4}")){
+            return true;
+        }
+        if(linha.matches("(?i)imul\\s+[a-zA-Z],\\s*\\d+,\\s*\\d+")){
+            return true;
+        }
+        if(linha.matches("(?i)imul\\s+0x\\d{4},\\s*\\d+,\\s*[a-zA-Z]+")){
+            return true;
+        }
+        if(linha.matches("(?i)imul\\s+0x\\d{4},\\s*\\d+,\\s*0x\\d{4}")){
+            return true;
+        }
+        if(linha.matches("(?i)imul\\s+0x\\d{4},\\s*\\d+,\\s*\\d+")){
+            return true;
+        }
         return false;
     }
 
@@ -121,9 +143,5 @@ public class EntradaSaida {
             System.out.println("Caractere inválido. Digite apenas números!");
             escolheTamanhoBarramento();
         }
-
-
     }
-
-
 }

@@ -82,14 +82,42 @@ public class ExemplosExpressaoRegular {
         System.out.println(texto);
 
         //imul 0x0001, 0x0001, C -> verifica imul (endereco de memoria), (endereco de memoria), (registrador)
-        texto = "imul 0x0001, 0x0002, C".matches("(?i)imul\\s+0x\\d{4},\\s*0x\\d{4},\\s*[a-zA-Z]");
+        texto = "imul 0x0001, 0x0002, C".matches("(?i)imul\\s+0x\\d{4},\\s*0x\\d{4},\\s*[a-zA-Z]+");
         System.out.println(texto);
 
         //imul 0x0001, 0x0001, 0x0002 -> verifica imul (endereco de memoria), (endereco de memoria), (endereco de memoria)
         texto = "imul 0x0001, 0x0002, 0x0003".matches("(?i)imul\\s+0x\\d{4},\\s*0x\\d{4},\\s*0x\\d{4}");
         System.out.println(texto);
 
-        //imul 0x0001, 0x0001, 5 -> verifica verifica imul (endereco de memoria), (endereco de memoria), (inteiro literal)
+        //imul 0x0001, 0x0001, 5 -> verifica imul (endereco de memoria), (endereco de memoria), (inteiro literal)
+        texto = "imul 0x0001, 0x0002, 5".matches("(?i)imul\\s+0x\\d{4},\\s*0x\\d{4},\\s*\\d+");
+        System.out.println(texto);
+
+
+        //imul A, 5, C -> verifica imul (registrador), (inteiro literal), (registrador)
+        texto = "imul A, 5, C".matches("(?i)imul\\s+[a-zA-Z],\\s*\\d+,\\s*[a-zA-Z]+");
+        System.out.println(texto);
+
+        //imul A, 5, 0x0003 -> imul (registrador), (inteiro literal), (endereco de memoria)
+        texto = "imul A, 5, 0x0003".matches("(?i)imul\\s+[a-zA-Z],\\s*\\d+,\\s*0x\\d{4}");
+        System.out.println(texto);
+
+        //imul A, 5, 5 -> verifica (registrador), (inteiro literal), (inteiro literal)
+        texto = "imul A, 5, 5".matches("(?i)imul\\s+[a-zA-Z],\\s*\\d+,\\s*\\d+");
+        System.out.println(texto);
+
+        //imul 0x0001, 5, C -> verifica (endereco de memoria), (inteiro literal), (registrador)
+        texto = "imul 0x0001, 5, C".matches("(?i)imul\\s+0x\\d{4},\\s*\\d+,\\s*[a-zA-Z]+");
+        System.out.println(texto);
+
+        //imul 0x0001, 5, 0x0003 -> verifica (endereco de memoria), (inteiro literal), (endereco de memoria)
+        texto = "imul 0x0001, 5, 0x0003".matches("(?i)imul\\s+0x\\d{4},\\s*\\d+,\\s*0x\\d{4}");
+        System.out.println(texto);
+
+        //imul 0x0001, 5, 5 -> verifica (endereco de memoria), (inteiro literal), (inteiro literal)
+        texto = "imul 0x0001, 5, 5".matches("(?i)imul\\s+0x\\d{4},\\s*\\d+,\\s*\\d+");
+        System.out.println(texto);
+
 
         texto = "add 0x0001, B".matches("(?i)inc\\s+0x\\d{4}");
         System.out.println(texto);
