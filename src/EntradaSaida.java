@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class EntradaSaida {
     public static void main(String[] args) throws FileNotFoundException {
 
+        escolheTamanhoBarramento();
         arquivoAssembly("assembly16bits.txt");
 
     }
@@ -20,21 +21,45 @@ public class EntradaSaida {
             FileReader arquivo = new FileReader(arquivoTXT);
             BufferedReader lerArquivo = new BufferedReader(arquivo);
 
+
             String linha = lerArquivo.readLine();
             while (linha !=null){
 
-                System.out.println(linha);
-                System.out.println(parserArquivo(linha));
-                linha = lerArquivo.readLine();
+                System.out.println(linha);//imprime o texto
+                System.out.println(parserArquivo(linha));//mostra se passa ou não no parser
+
+                linha = lerArquivo.readLine();// passa para proxima linha do txt
+
+
 
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    //------------------------------------------
+    enum Encoder{
+        MOV(""), INC(""), ADD(""), INUL("");
 
+
+        Encoder(String s) {
+
+            switch (s.toUpperCase()){
+                case "MOV":
+
+                    break;
+                case "INC":
+                    break;
+                case "ADD":
+                    break;
+                case "INUL":
+                    break;
+            }
+        }
+    }
+    //------------------------------------------
     public static boolean parserArquivo(String linha){
-        if(linha.matches("(?i)mov\\s+0x\\d{4},\\s*\\d")){
+        if(linha.matches("(?i)mov\\s+0x\\d{4},\\s*\\d\\s*")){
             return true;
         }
         if(linha.matches("(?i)mov\\s+[a-zA-Z],\\s*\\d")){
@@ -120,18 +145,18 @@ public class EntradaSaida {
 
     public static void escolheTamanhoBarramento(){
         Scanner teclado = new Scanner(System.in);
-        System.out.println("Informe tamanho do barramento: 8, 16 ou 32 bits?");
+        System.out.println("Informe tamanho da palavra: 8, 16 ou 32 bits?");
         try {
             int tamanhoBarramento = teclado.nextInt();
             switch (tamanhoBarramento){
                 case (8):
-                    System.out.println("Escolhido barramento de 8bits");
+                    System.out.println("Escolhido palavra de 8bits");
                     break;
                 case (16):
-                    System.out.println("Escolhido barramento de 16bits");
+                    System.out.println("Escolhido palavra de 16bits");
                     break;
                 case (32):
-                    System.out.println("Escolhido barramento de 32bits");
+                    System.out.println("Escolhido palavra de 32bits");
                     break;
                 default:
                     System.out.println("Valor inválido!");

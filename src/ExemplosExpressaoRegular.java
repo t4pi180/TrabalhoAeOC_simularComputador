@@ -93,7 +93,6 @@ public class ExemplosExpressaoRegular {
         texto = "imul 0x0001, 0x0002, 5".matches("(?i)imul\\s+0x\\d{4},\\s*0x\\d{4},\\s*\\d+");
         System.out.println(texto);
 
-
         //imul A, 5, C -> verifica imul (registrador), (inteiro literal), (registrador)
         texto = "imul A, 5, C".matches("(?i)imul\\s+[a-zA-Z],\\s*\\d+,\\s*[a-zA-Z]+");
         System.out.println(texto);

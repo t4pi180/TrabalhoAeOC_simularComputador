@@ -1,13 +1,11 @@
-mov A, 2 
+mov A, 2
 mov B, 3
 mov 0x0001, A
-add A, B 
-
-mov 0x0001, A 
-inc 0x0001 
-imul C, 0x0001, 4 
+add A, B
+mov 0x0001, A
+inc 0x0001
+imul C, 0x0001, 4
 mov 0x0002, C
-
 mov 0x0003, 2
 inc 0x0003
 add 0x0003, 2
