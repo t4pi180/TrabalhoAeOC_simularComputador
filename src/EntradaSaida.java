@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -9,13 +10,14 @@ import java.util.Scanner;
 public class EntradaSaida {
     public static void main(String[] args) throws FileNotFoundException {
 
-        escolheTamanhoBarramento();
+
         arquivoAssembly("assembly16bits.txt");
 
     }
 
 
     public static void arquivoAssembly(String arquivoTXT){
+//        byte[] valores;
 
         try {
             FileReader arquivo = new FileReader(arquivoTXT);
@@ -26,8 +28,9 @@ public class EntradaSaida {
             while (linha !=null){
 
                 System.out.println(linha);//imprime o texto
-                System.out.println(parserArquivo(linha));//mostra se passa ou não no parser
-
+//                System.out.println(parserArquivo(linha));//mostra se passa ou não no parser
+                if(!parserArquivo(linha)) throw new ExcecaoParser();
+                encoder(linha);
                 linha = lerArquivo.readLine();// passa para proxima linha do txt
 
 
@@ -35,29 +38,41 @@ public class EntradaSaida {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (ExcecaoParser excecaoParser) {
+            excecaoParser.printStackTrace();
         }
     }
     //------------------------------------------
-    enum Encoder{
-        MOV(""), INC(""), ADD(""), INUL("");
+    enum encoder{
+        MOV, INC, ADD, INUL;
 
-
-        Encoder(String s) {
-
-            switch (s.toUpperCase()){
-                case "MOV":
-
-                    break;
-                case "INC":
-                    break;
-                case "ADD":
-                    break;
-                case "INUL":
-                    break;
-            }
-        }
     }
     //------------------------------------------
+
+    public static void encoder(String texto){
+        String s =texto;
+        String[] array= s.split(" ");
+        switch (array[0].toUpperCase()){
+            case "MOV":
+                byte[] mov = array[0].getBytes();
+                System.out.println(Arrays.toString(mov));
+                break;
+            case "INC":
+                byte[] inc = array[0].getBytes();
+                System.out.println(Arrays.toString(inc));
+                break;
+            case "IMUL":
+                byte[] imul = array[0].getBytes();
+                System.out.println(Arrays.toString(imul));
+                break;
+            case "ADD":
+                byte[] add = array[0].getBytes();
+                System.out.println(Arrays.toString(add));
+                break;
+        }
+
+//        System.out.println(array[(0)]);
+    }
     public static boolean parserArquivo(String linha){
         if(linha.matches("(?i)mov\\s+0x\\d{4},\\s*\\d\\s*")){
             return true;
