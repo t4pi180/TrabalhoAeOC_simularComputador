@@ -17,7 +17,7 @@ public class EntradaSaida {
 
 
     public static void arquivoAssembly(String arquivoTXT){
-//        byte[] valores;
+
 
         try {
             FileReader arquivo = new FileReader(arquivoTXT);
@@ -28,7 +28,7 @@ public class EntradaSaida {
             while (linha !=null){
 
                 System.out.println(linha);//imprime o texto
-//                System.out.println(parserArquivo(linha));//mostra se passa ou não no parser
+
                 if(!parserArquivo(linha)) throw new ExcecaoParser();
                 encoder(linha);
                 linha = lerArquivo.readLine();// passa para proxima linha do txt
@@ -50,29 +50,39 @@ public class EntradaSaida {
     //------------------------------------------
 
     public static void encoder(String texto){
+        byte[] vetor=new byte[3];
         String s =texto;
         String[] array= s.split(" ");
         switch (array[0].toUpperCase()){
             case "MOV":
                 byte[] mov = array[0].getBytes();
-                System.out.println(Arrays.toString(mov));
+                byte novoValor=100;
+                vetor[0]=novoValor;
+//                char[] p = s.toCharArray(); não é isso
+//                vetor[1]=;
                 break;
             case "INC":
                 byte[] inc = array[0].getBytes();
-                System.out.println(Arrays.toString(inc));
+
                 break;
             case "IMUL":
                 byte[] imul = array[0].getBytes();
-                System.out.println(Arrays.toString(imul));
+
                 break;
             case "ADD":
                 byte[] add = array[0].getBytes();
-                System.out.println(Arrays.toString(add));
+
                 break;
         }
 
 //        System.out.println(array[(0)]);
     }
+
+    public static void buffer(){
+        byte[] vetor;
+
+    }
+
     public static boolean parserArquivo(String linha){
         if(linha.matches("(?i)mov\\s+0x\\d{4},\\s*\\d\\s*")){
             return true;
